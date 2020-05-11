@@ -138,22 +138,21 @@ public class WikitudePlugin implements MethodCallHandler, RequestPermissionsResu
       }
     }
 
-    if(deniedPermissions.size() > 0) {
+    if (deniedPermissions.size() > 0) {
       String[] deniedPermissionsArray = new String[deniedPermissions.size()];
       deniedPermissionsArray = deniedPermissions.toArray(deniedPermissionsArray);
 
-      if(permissionResult != null && requestCode == PermissionManager.WIKITUDE_PERMISSION_REQUEST) {
+      if (permissionResult != null && requestCode == PermissionManager.WIKITUDE_PERMISSION_REQUEST) {
         Response response = new Response(false, PermissionUtil.getPermissionErrorText(deniedPermissionsArray).toString());
         permissionResult.success(new Gson().toJson(response));
-      } else if(requestCode == architectFactory.getExternalStoragePermissionRequestCode()) {
+      } else if (requestCode == architectFactory.getExternalStoragePermissionRequestCode()) {
         architectFactory.captureScreenError(PermissionUtil.getPermissionErrorText(deniedPermissionsArray).toString());
       }
-    }
-    else {
-      if(permissionResult != null && requestCode == PermissionManager.WIKITUDE_PERMISSION_REQUEST) {
+    } else {
+      if (permissionResult != null && requestCode == PermissionManager.WIKITUDE_PERMISSION_REQUEST) {
         Response response = new Response(true, "");
         permissionResult.success(new Gson().toJson(response));
-      } else if(requestCode == architectFactory.getExternalStoragePermissionRequestCode()) {
+      } else if (requestCode == architectFactory.getExternalStoragePermissionRequestCode()) {
         architectFactory.captureScreen();
       }
     }
